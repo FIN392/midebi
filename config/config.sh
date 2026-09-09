@@ -65,6 +65,38 @@ sudo apt autoremove --purge -y
 sudo apt autoclean 
 sudo apt clean
 
+# Firewall
+print_section "CONFIGURANDO FIREWALL"
+NFT_CONF="/etc/nftables.conf"
+sudo cat << 'EOF' > "$NFT_CONF"
+#!/usr/sbin/nft -f
+
+flush ruleset
+
+table inet filter {
+    chain input {
+        type filter hook input priority filter; policy drop;
+
+        # Permitir tráfico interno del sistema (loopback)
+        iifname "lo" accept
+
+        # Permitir respuestas a respuestas/conexiones iniciadas por ti
+        ct state established,related accept
+
+        # (Opcional) Permitir ICMP (ping)
+        ip protocol icmp accept
+    }
+    chain forward {
+        type filter hook forward priority filter; policy drop;
+    }
+    chain output {
+        type filter hook output priority filter; policy accept;
+    }
+}
+EOF
+sudo chmod 755 "$NFT_CONF"
+sudo systemctl enable --now nftables
+
 # Optimización de hardware
 print_section "OPTIMIZACIONES HARDWARE"
         
