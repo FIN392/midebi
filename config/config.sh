@@ -41,7 +41,10 @@ bash "$DIR_ACTUAL/updateme.sh"
 
 # Install GNOME con GDM3
 print_section "INSTALANDO GNOME"
-sudo apt install xserver-xorg-core xinit gnome-core -y
+sudo apt install -y \
+  xserver-xorg-core \
+  xinit \
+  gnome-core
 sudo systemctl set-default graphical.target
 
 # Eliminar software
@@ -68,7 +71,7 @@ sudo apt clean
 # Firewall
 print_section "CONFIGURANDO FIREWALL"
 NFT_CONF="/etc/nftables.conf"
-sudo cat << 'EOF' > "$NFT_CONF"
+sudo cat << 'EOF' | sudo tee /etc/nftables.conf > /dev/null
 #!/usr/sbin/nft -f
 
 flush ruleset
