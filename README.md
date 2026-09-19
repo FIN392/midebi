@@ -12,7 +12,6 @@ Si encuentras algo útil, genial.
 - GNOME pero sin mucho del bloatware que incluye
 - Tiling Shell (by domferr) para ajustar las ventanas
 - Snapper para snapshots en BTRFS
-- Firefox configurado maximizando la privacidad
 
 ---
 
