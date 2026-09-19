@@ -185,9 +185,9 @@ bash "$DIR_ACTUAL/gnomeconfig.sh"
 print_section "INSTALANDO TILING SHELL"
 bash "$DIR_ACTUAL/tilingshell.sh"
 
-# Instalar y configura Firefox ESR
-print_section "INSTALANDO FIREFOX ESR"
-bash "$DIR_ACTUAL/firefox.sh"
+# # Instalar y configura Firefox ESR
+# print_section "INSTALANDO FIREFOX ESR"
+# bash "$DIR_ACTUAL/firefox.sh"
 
 # Instalar y configura Snapper
 print_section "INSTALANDO SNAPPER"
