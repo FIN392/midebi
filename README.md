@@ -97,6 +97,8 @@ Seleccionar *Graphical install* y seleccionar las siguientes opciones en las dif
 <!-- -->
 - Información de proxy HHTP: *(vacio)*
 <!-- -->
+- ¿Desea participar en la encuesta sobre el uso de los paquetes?: *No*
+<!-- -->
 - Elegir los programas a instalar: *(Desmarcar TODO excepto '**Utilidades estándar del sistema**')*
 <!-- -->
 - Instalación completada
