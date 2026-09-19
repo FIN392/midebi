@@ -91,6 +91,10 @@ Seleccionar *Graphical install* y seleccionar las siguientes opciones en las dif
 <!-- -->
 - Desea participar en la encuesta sobre el uso de los paquetes: *No*
 <!-- -->
+- País de la réplica de Debian: *España*
+<!-- -->
+- Réplica de Debian: *deb.debian.org*
+<!-- -->
 - Elegir los programas a instalar: *(Desmarcar TODO excepto '**Utilidades estándar del sistema**')*
 <!-- -->
 - Instalación completada
