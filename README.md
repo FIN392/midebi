@@ -95,6 +95,8 @@ Seleccionar *Graphical install* y seleccionar las siguientes opciones en las dif
 <!-- -->
 - Réplica de Debian: *deb.debian.org*
 <!-- -->
+- Información de proxy HHTP: *(vacio)*
+<!-- -->
 - Elegir los programas a instalar: *(Desmarcar TODO excepto '**Utilidades estándar del sistema**')*
 <!-- -->
 - Instalación completada
