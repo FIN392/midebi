@@ -162,11 +162,24 @@ sudo apt install -y \
 
 # Eliminar directorios innecesarios
 print_section "ELIMINANDO DIRECTORIOS INNECESARIOS"
-rm --force --recursive ~/Imágenes/
-rm --force --recursive ~/Música/
-rm --force --recursive ~/Público/
-rm --force --recursive ~/Vídeos/
-\ls --width=1
+sudo cat << 'EOF' | sudo tee /etc/xdg/user-dirs.defaults > /dev/null
+# Default settings for user directories
+#
+# The values are relative pathnames from the home directory and
+# will be translated on a per-path-element basis into the users locale
+DESKTOP=Desktop
+DOWNLOAD=Downloads
+#TEMPLATES=Templates
+#PUBLICSHARE=Public
+DOCUMENTS=Documents
+#MUSIC=Music
+#PICTURES=Pictures
+#VIDEOS=Videos
+# Another alternative is:
+#MUSIC=Documents/Music
+#PICTURES=Documents/Pictures
+#VIDEOS=Documents/Videos
+EOF
 
 # Instalar JetBrains font
 print_section "INSTALANDO FUENTES JETBRAINS MONO"
