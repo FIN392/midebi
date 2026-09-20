@@ -1,5 +1,13 @@
-sudo apt update && sudo apt install extrepo -y
+# Desinstala
+sudo apt purge librewolf -y
+sudo extrepo disable librewolf
+sudo apt purge extrepo -y
+sudo apt autoremove --purge -y
+rm -rf ~/.librewolf ~/.cache/librewolf
+sudo rm -rf /var/lib/extrepo
 
-sudo extrepo enable librewolf && sudo extrepo update librewolf
-
-sudo apt update && sudo apt install librewolf -y
+# Instala
+sudo apt install extrepo -y
+sudo extrepo enable librewolf
+sudo extrepo update librewolf
+sudo apt install librewolf -y
