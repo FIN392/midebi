@@ -95,7 +95,7 @@ Seleccionar *Graphical install* y seleccionar las siguientes opciones en las dif
 <!-- -->
 - Réplica de Debian: *deb.debian.org*
 <!-- -->
-- Información de proxy HHTP: *(vacio)*
+- Información de proxy HTTP: *(vacio)*
 <!-- -->
 - ¿Desea participar en la encuesta sobre el uso de los paquetes?: *No*
 <!-- -->
