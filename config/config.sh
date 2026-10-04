@@ -73,19 +73,14 @@ print_section "CONFIGURANDO FIREWALL"
 NFT_CONF="/etc/nftables.conf"
 sudo cat << 'EOF' | sudo tee /etc/nftables.conf > /dev/null
 #!/usr/sbin/nft -f
-
 flush ruleset
-
 table inet filter {
     chain input {
         type filter hook input priority filter; policy drop;
-
         # Permitir tráfico interno del sistema (loopback)
         iifname "lo" accept
-
         # Permitir respuestas a respuestas/conexiones iniciadas por ti
         ct state established,related accept
-
         # (Opcional) Permitir ICMP (ping)
         ip protocol icmp accept
     }
@@ -104,9 +99,9 @@ sudo systemctl enable --now nftables
 print_section "OPTIMIZACIONES HARDWARE"
         
         # A: Gestión de microcódigo y planificador AMD Zen 3
-        sudo systemctl enable --now fstrim.timer
-        sudo apt install amd64-microcode -y
-        sudo apt install firmware-linux-nonfree -y
+#        sudo systemctl enable --now fstrim.timer
+#        sudo apt install amd64-microcode -y
+#        sudo apt install firmware-linux-nonfree -y
         # AMD P-State Driver
         #   > cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_driver
         #   Debe ser 'amd-pstate-epp', si no cambiar en GRUB
@@ -130,17 +125,17 @@ print_section "OPTIMIZACIONES HARDWARE"
 
 
         # B: Sensores y monitorización de temperaturas para Asus Nuvoton y ASUS X570
-        sudo apt install lm-sensors -y
-        sudo sensors-detect --auto
-        sudo apt install psensor -y
-        echo "nct6775" | sudo tee /etc/modules-load.d/nct6775.conf
-        sudo modprobe nct6775 || true 
-        lsmod | grep nct6775
+#        sudo apt install lm-sensors -y
+#        sudo sensors-detect --auto
+#        sudo apt install psensor -y
+#        echo "nct6775" | sudo tee /etc/modules-load.d/nct6775.conf
+#        sudo modprobe nct6775 || true 
+#        lsmod | grep nct6775
         
         # C: Ajustes E/S de Almacenamiento y Swap (NVMe / SSD)
-        echo "vm.swappiness=10" | sudo tee /etc/sysctl.d/99-swappiness.conf
-        echo "vm.vfs_cache_pressure=50" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
-        sudo sysctl --system
+#        echo "vm.swappiness=10" | sudo tee /etc/sysctl.d/99-swappiness.conf
+#        echo "vm.vfs_cache_pressure=50" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
+#        sudo sysctl --system
         # Asegurar el programador de I/O adecuado para discos NVMe (none o kyber).
         #   cat /sys/block/nvme0n1/queue/scheduler
         # El resultado mostrará algo similar a esto:
