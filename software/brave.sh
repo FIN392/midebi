@@ -3,17 +3,20 @@ set -Eeuo pipefail
 trap 'rc=$?; echo "ERROR: \"$BASH_COMMAND\" falló en la línea $LINENO (código de salida: $rc)" >&2; exit "$rc"' ERR
 
 # Instalación de Brave Origin
-DIR_ACTUAL="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# DIR_ACTUAL="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Desinstalar
+echo -e "\e[36m*** Desinstalar ***\e[0m"
 sudo apt purge "brave*" -y || true
 sudo apt autoremove -y
 rm -rf ~/.config/BraveSoftware/
 
 # Instalar
+echo -e "\e[36m*** Instalar ***\e[0m"
 curl -fsS https://dl.brave.com/install.sh | FLAVOR=origin sh
 
 # Configurar
+echo -e "\e[36m*** Configurar ***\e[0m"
 mkdir -p "$HOME/.config/BraveSoftware/Brave-Origin/Default"
 sudo cat << 'EOF' | sudo tee "$HOME/.config/BraveSoftware/Brave-Origin/Default/Preferences" > /dev/null
 {
