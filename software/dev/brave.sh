@@ -15,4 +15,29 @@ curl -fsS https://dl.brave.com/install.sh | FLAVOR=origin sh
 
 # Configurar
 mkdir -p "$HOME/.config/BraveSoftware/Brave-Origin/Default"
-cp -f "$DIR_ACTUAL/brave.Preferences" "$HOME/.config/BraveSoftware/Brave-Origin/Default/Preferences"
+sudo cat << 'EOF' | sudo tee "$HOME/.config/BraveSoftware/Brave-Origin/Default/Preferences" > /dev/null
+{
+  "bookmark_bar": { "show_on_all_tabs": false },
+  "brave": {
+    "tabs": { "vertical_tabs_enabled": true },
+    "always_show_bookmark_bar_on_ntp": false,
+    "new_tab_page": {
+      "show_background_image": true,
+      "background": {
+        "random": false,
+        "selected_value": "#000000",
+        "type": "color"
+      },
+      "hide_all_widgets": true,
+      "show_brave_news": false,
+      "show_stats": false,
+      "show_rewards": false
+    }
+  },
+  "ntp": {
+    "custom_background_inspiration": false,
+    "custom_background_local_to_device": false,
+    "shortcust_visible": false
+  }
+}
+EOF
