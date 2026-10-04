@@ -12,6 +12,7 @@ sudo apt autoremove -y
 rm -rf ~/.config/.../
 
 # Instalar
+echo -e "\e[36m*** Instalar ***\e[0m"
 sudo apt install ... -y
 
 # Configurar
