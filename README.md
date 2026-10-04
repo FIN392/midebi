@@ -89,14 +89,6 @@ Seleccionar *Graphical install* y seleccionar las siguientes opciones en las dif
 - Réplica de Debian: *deb.debian.org*
 - Información de proxy HTTP: *(vacio)*
 <!-- -->
-- Desea participar en la encuesta sobre el uso de los paquetes: *No*
-<!-- -->
-- País de la réplica de Debian: *España*
-<!-- -->
-- Réplica de Debian: *deb.debian.org*
-<!-- -->
-- Información de proxy HTTP: *(vacio)*
-<!-- -->
 - ¿Desea participar en la encuesta sobre el uso de los paquetes?: *No*
 <!-- -->
 - Elegir los programas a instalar: *(Desmarcar TODO excepto '**Utilidades estándar del sistema**')*
