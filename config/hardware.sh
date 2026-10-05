@@ -26,6 +26,7 @@ awk '
   }
   { print }
 ' /etc/fstab > /tmp/fstab.tmp && sudo mv /tmp/fstab.tmp /etc/fstab
+sudo systemctl daemon-reload
 sudo mount -o remount /
 
 # Rendimiento CPU 
