@@ -20,8 +20,12 @@ sudo sysctl --system
 
 # Optimización de Btrfs y Puntos de Montaje (/etc/fstab)
 sudo apt install nvme-cli -y
-sudo nano /etc/fstab
-# UUID=e503b140-c5e0-46e1-aae4-82fe3a6f9bec / btrfs defaults,noatime,compress=zstd:3,subvol=@rootfs 0 0
+awk '
+  !/^#/ && $2 == "/" && $3 == "btrfs" {
+    $4 = "defaults,noatime,compress=zstd:3,subvol=@rootfs"
+  }
+  { print }
+' /etc/fstab > /tmp/fstab.tmp && sudo mv /tmp/fstab.tmp /etc/fstab
 sudo mount -o remount /
 
 # Rendimiento CPU 
