@@ -97,54 +97,7 @@ sudo systemctl enable --now nftables
 
 # Optimización de hardware
 print_section "OPTIMIZACIONES HARDWARE"
-        
-        # A: Gestión de microcódigo y planificador AMD Zen 3
-#        sudo systemctl enable --now fstrim.timer
-#        sudo apt install amd64-microcode -y
-#        sudo apt install firmware-linux-nonfree -y
-        # AMD P-State Driver
-        #   > cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_driver
-        #   Debe ser 'amd-pstate-epp', si no cambiar en GRUB
-        # Daemon Power-Profiles
-        # CAMBIAR POR TUNED-PPD
-        # sudo apt install power-profiles-daemon -y
-        # sudo systemctl enable --now power-profiles-daemon
-        # powerprofilesctl set performance
-
-        #  # 1. Ajustar el perfil global a alto rendimiento
-        #  powerprofilesctl set performance
-        #  
-        #  # 2. Fijar la preferencia de la CPU Ryzen en modo rendimiento puro
-        #  echo "performance" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/energy_performance_preference > /dev/null
-        #  
-        #  # 3. Comprobar que el cambio se aplicó correctamente
-        #  echo "--- Perfil activo ---"
-        #  powerprofilesctl
-        #  echo "--- Estado de los núcleos AMD ---"
-        #  cat /sys/devices/system/cpu/cpu0/cpufreq/energy_performance_preference
-
-
-        # B: Sensores y monitorización de temperaturas para Asus Nuvoton y ASUS X570
-#        sudo apt install lm-sensors -y
-#        sudo sensors-detect --auto
-#        sudo apt install psensor -y
-#        echo "nct6775" | sudo tee /etc/modules-load.d/nct6775.conf
-#        sudo modprobe nct6775 || true 
-#        lsmod | grep nct6775
-        
-        # C: Ajustes E/S de Almacenamiento y Swap (NVMe / SSD)
-#        echo "vm.swappiness=10" | sudo tee /etc/sysctl.d/99-swappiness.conf
-#        echo "vm.vfs_cache_pressure=50" | sudo tee -a /etc/sysctl.d/99-swappiness.conf
-#        sudo sysctl --system
-        # Asegurar el programador de I/O adecuado para discos NVMe (none o kyber).
-        #   cat /sys/block/nvme0n1/queue/scheduler
-        # El resultado mostrará algo similar a esto:
-        #   [none] mq-deadline kyber bfq
-
-        # Añadir amd_pstate en GRUB
-        # sudo nano /etc/default/grub
-        # ...."quiet amd_pstate=active"
-        # sudo update-grub
+bash "$DIR_ACTUAL/hardware.sh"
 
 # Instalar herramientas básicas
 print_section "INSTALANDO HERRAMIENTAS"
