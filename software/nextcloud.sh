@@ -10,6 +10,7 @@ echo -e "\e[36m*** Desinstalar ***\e[0m"
 sudo apt purge "nextcloud-desktop*" -y || true
 sudo apt autoremove -y
 rm -rf ~/.config/Nextcloud/
+rm -rf ~/.cache/Nextcloud/
 
 # Instalar
 echo -e "\e[36m*** Instalar ***\e[0m"
