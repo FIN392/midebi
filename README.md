@@ -1,4 +1,4 @@
-## ⚠️ AVISO IMPORTANTE
+## AVISO IMPORTANTE
 
 Este repositorio contiene las instrucciones de instalación y configuración para mi equipo de escritorio personal.
 
@@ -6,7 +6,7 @@ Si encuentras algo útil, genial.
 
 ---
 
-## ℹ️ ¿Qué instalo?
+## ¿Qué instalo?
 
 - Debian con una partición EFI, una EXT4 para /boot, una BTRFS para / y otra de swap
 - GNOME pero sin mucho del bloatware que incluye
@@ -15,7 +15,7 @@ Si encuentras algo útil, genial.
 
 ---
 
-## 📦 Instalación
+## Instalación
 
 Lanzar la ISO de Debian desde mi amado Ventoy.
 
@@ -99,7 +99,7 @@ Se reiniciará el sistema en este punto.
 
 ---
 
-## ⚙️ Configuración
+## Configuración
 
 Al inicia el sistema se mostrará la terminal, identificarse con el ID de usuario y contraseña, y ejecutar estos comandos:
 ```bash
@@ -107,4 +107,16 @@ sudo apt install git --no-install-recommends --no-install-suggests -y
 git clone https://github.com/fin392/midebi
 bash midebi/config/config.sh
 ```
+Se reiniciará el sistema en este punto.
+
+Al iniciar en el entorno Gnome, usando los scripts Bash de _~/midebi/software_ instalar:
+- Fastfetch
+- Brave
+- Nextcloud
+- Obsidiam
+
+Configurar Nextcloud para acceder a la NAS.
+
+Configurar Obsidiam para acceder a la bóveda y seguir los pasos del documento 'Instalación de Debian'.
+
 ---
