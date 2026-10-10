@@ -13,15 +13,15 @@ gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profi
 gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$PROFILE_UUID/ default-size-rows 43
 
 # Modificaciones en .bashrc
-BLOQUE='
+BLOQUE="
 # Configuraciones personales
 # 'ls' a mi gusto
 alias ls='ls -l --color=auto --all --time-style=long-iso'
 # 'edit' para lanzar el editor
 edit() {
-    gnome-text-editor "$@" &
+    gnome-text-editor \"\$@\" &
     disown
 }
-'
+"
 echo "$BLOQUE" >> ~/.bashrc
 echo "$BLOQUE" | sudo tee -a /root/.bashrc > /dev/null
