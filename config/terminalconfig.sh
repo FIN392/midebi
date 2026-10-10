@@ -24,4 +24,4 @@ edit() {
 }
 "
 echo "$BLOQUE" >> ~/.bashrc
-echo "$BLOQUE" | sudo tee -a /root/.bashrc > /dev/null
+
