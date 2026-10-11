@@ -13,6 +13,8 @@ Si encuentras algo útil, genial.
 - Tiling Shell (by domferr) para ajustar las ventanas
 - Snapper para snapshots en BTRFS
 
+Ademas se instala: Brave, el cliente de Nextcloud y Obsidian para poder acceder a mis ficheros y continuar con la configuración del sistema.
+
 ---
 
 ## Instalación
