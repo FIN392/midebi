@@ -7,7 +7,6 @@ echo -e "\e[36m*** Desinstalar ***\e[0m"
 sudo apt purge "obsidian*" -y || true
 sudo apt autoremove -y
 rm -rf ~/.config/obsidian/
-rm -rf ~/.cache/obsidian/
 
 # Instalar
 echo -e "\e[36m*** Instalar ***\e[0m"
