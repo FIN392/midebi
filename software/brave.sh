@@ -8,6 +8,7 @@ sudo apt purge "brave*" -y || true
 sudo apt autoremove -y
 rm -rf ~/.config/BraveSoftware/
 rm -rf ~/.cache/BraveSoftware/
+rm -f ~/.local/share/applications/brave*
 
 # Instalar
 echo -e "\e[36m*** Instalar ***\e[0m"
