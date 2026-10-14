@@ -106,7 +106,8 @@ sudo apt install -y \
   curl \
   jq \
   gparted \
-  htop
+  htop \
+  make
 
 # Eliminar directorios innecesarios
 print_section "ELIMINANDO DIRECTORIOS INNECESARIOS"
