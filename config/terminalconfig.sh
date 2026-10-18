@@ -17,11 +17,6 @@ BLOQUE="
 # Configuraciones personales
 # 'ls' a mi gusto
 alias ls='ls -l --color=auto --all --time-style=long-iso'
-# 'edit' para lanzar el editor
-edit() {
-    gnome-text-editor \"\$@\" &
-    disown
-}
 "
 echo "$BLOQUE" >> ~/.bashrc
 
