@@ -63,6 +63,7 @@ sudo apt purge -y \
   gnome-disk-utility \
   totem \
   simple-scan \
+  evince \
   loupe
 sudo apt autoremove --purge -y
 sudo apt autoclean 
