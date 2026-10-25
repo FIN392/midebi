@@ -14,7 +14,7 @@ Si encuentras algo útil, genial.
 - Tiling Shell (by domferr) para ajustar las ventanas
 - Snapper y Btrfs-Assistant para gestionar los snapshots en BTRFS
 
-Ademas se instala: Brave, el cliente de Nextcloud y Obsidian para poder acceder a mis ficheros y continuar con la configuración del sistema.
+Ademas se instala: Librewolf, el cliente de Nextcloud y Obsidian para poder acceder a mis ficheros y continuar con la configuración del sistema.
 
 ---
 
@@ -114,7 +114,7 @@ Se reiniciará el sistema en este punto.
 
 Al iniciar en el entorno Gnome, usando los scripts Bash de _~/midebi/software_ instalar:
 - Fastfetch
-- Brave
+- Librewolf
 - Nextcloud
 - Obsidiam
 
