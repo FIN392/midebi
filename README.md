@@ -12,7 +12,7 @@ Si encuentras algo útil, genial.
 - / y /home en dos subvolumenes BTRFS diferentes
 - GNOME pero sin mucho del bloatware que incluye
 - Tiling Shell (by domferr) para ajustar las ventanas
-- Snapper para los snapshots en BTRFS
+- Snapper y Btrfs-Assistant para gestionar los snapshots en BTRFS
 
 Ademas se instala: Brave, el cliente de Nextcloud y Obsidian para poder acceder a mis ficheros y continuar con la configuración del sistema.
 
