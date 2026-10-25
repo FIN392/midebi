@@ -9,9 +9,10 @@ Si encuentras algo útil, genial.
 ## ¿Qué instalo?
 
 - Debian con una partición EFI, una EXT4 para /boot, una BTRFS para / y otra de swap
+- / y /home en dos subvolumenes BTRFS diferentes
 - GNOME pero sin mucho del bloatware que incluye
 - Tiling Shell (by domferr) para ajustar las ventanas
-- Snapper para snapshots en BTRFS
+- Snapper para los snapshots en BTRFS
 
 Ademas se instala: Brave, el cliente de Nextcloud y Obsidian para poder acceder a mis ficheros y continuar con la configuración del sistema.
 
