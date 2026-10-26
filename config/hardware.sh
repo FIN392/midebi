@@ -39,7 +39,7 @@ sudo apt install amd64-microcode -y
 # Sensores
 sudo apt install lm-sensors -y
 sudo sensors-detect --auto
-sensors
+sensors || true
 echo "nct6775" | sudo tee /etc/modules-load.d/nct6775.conf
 sudo modprobe nct6775 || true 
 
