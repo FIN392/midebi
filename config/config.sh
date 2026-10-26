@@ -40,7 +40,7 @@ print_section "ACTUALIZANDO EL SISTEMA"
 bash "$DIR_ACTUAL/updateme.sh"
 
 # Separar /home a un subvolumne btrfs diferente a /
-sudo mkdir -p /mnt/btrfs-home
+sudo mkdir -p /mnt/btrfs-home/@home
 BDEV=$(findmnt -n -o SOURCE / | sed 's/\[.*\]//')
 sudo mount -o subvolid=5 $BDEV /mnt/btrfs-home
 sudo btrfs subvolume create /mnt/btrfs-home/@home
