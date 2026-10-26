@@ -40,18 +40,16 @@ print_section "ACTUALIZANDO EL SISTEMA"
 bash "$DIR_ACTUAL/updateme.sh"
 
 # Separar /home a un subvolumne btrfs diferente a /
-sudo mkdir -p /mnt/btrfs-home
-BDEV=$(findmnt -n -o SOURCE / | sed 's/\[.*\]//')
-sudo mount -o subvolid=5 "$BDEV" /mnt/btrfs-home
-sudo btrfs subvolume create /mnt/btrfs-home/@home
-sudo cp --reflink=always -a /home/. /mnt/btrfs-home/@home
-BTRFS_UUID=$(findmnt -n -o UUID /)
-echo "UUID=$BTRFS_UUID  /home   btrfs  defaults,noatime,compress=zstd:3,subvol=@home   0  0" | sudo tee -a /etc/fstab
-sudo umount /mnt/btrfs-home
-sudo systemctl daemon-reload
-sudo mount -a
-
-exit 0
+#sudo mkdir -p /mnt/btrfs-home
+#BDEV=$(findmnt -n -o SOURCE / | sed 's/\[.*\]//')
+#sudo mount -o subvolid=5 "$BDEV" /mnt/btrfs-home
+#sudo btrfs subvolume create /mnt/btrfs-home/@home
+#sudo cp --reflink=always -a /home/. /mnt/btrfs-home/@home
+#BTRFS_UUID=$(findmnt -n -o UUID /)
+#echo "UUID=$BTRFS_UUID  /home   btrfs  defaults,noatime,compress=zstd:3,subvol=@home   0  0" | sudo tee -a /etc/fstab
+#sudo umount /mnt/btrfs-home
+#sudo systemctl daemon-reload
+#sudo mount -a
 
 # Install GNOME con GDM3
 print_section "INSTALANDO GNOME"
