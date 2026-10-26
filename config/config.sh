@@ -51,6 +51,8 @@ sudo umount /mnt/btrfs-home
 sudo systemctl daemon-reload
 sudo mount -a
 
+exit 0
+
 # Install GNOME con GDM3
 print_section "INSTALANDO GNOME"
 sudo apt install -y \
