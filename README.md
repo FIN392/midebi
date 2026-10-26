@@ -71,7 +71,7 @@ Seleccionar *Graphical install* y seleccionar las siguientes opciones en las dif
 <!-- -->
 - *(Seleccionar 'ESPACIO LIBRE)*
 - Cómo usar este espacio libre: *Crear una partición nueva*
-- Nuevo tamaño de partición: *(El total del disco)*
+- Nuevo tamaño de partición: *max*
 - Configuración de la partición:
   * Utilizar como: *sistema de ficheros btrfs transaccional*
 - *Se ha terminado de definir la partición*
