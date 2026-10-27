@@ -52,6 +52,5 @@ cd ~
 git clone https://github.com/Antynea/grub-btrfs.git
 cd grub-btrfs
 sudo make install
-grub-mkconfig
 sudo systemctl enable --now grub-btrfsd
 sudo update-grub
