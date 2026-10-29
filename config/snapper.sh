@@ -48,7 +48,7 @@ sudo snapper -c home list
 sudo apt install btrfs-assistant -y
 
 # Snapshots en GRUB: grub-btrfs
-cd ~
+cd /tmp
 git clone https://github.com/Antynea/grub-btrfs.git
 cd grub-btrfs
 sudo make install
