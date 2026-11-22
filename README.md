@@ -49,6 +49,7 @@ Seleccionar *Graphical install* y seleccionar las siguientes opciones en las dif
 - Ubicación de la nueva partición: *Principio*
 - Configuración de la partición:
   * Utilizar como: *Partición del sistema "EFI"*
+  * Punto de montaje: */boot/efi*
   * Marca de arranque: *desactivada*
 - *Se ha terminado de definir la partición*
 <!-- -->
