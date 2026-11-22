@@ -31,7 +31,7 @@ sudo mount -o remount /
 
 # Rendimiento CPU 
 sudo apt install power-profiles-daemon -y
-powerprofilesctl set balanced
+powerprofilesctl set balanced || true
 
 # Microcodigo de AMD
 sudo apt install amd64-microcode -y
