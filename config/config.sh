@@ -54,8 +54,6 @@ sudo mount -a
 # Install GNOME con GDM3
 print_section "INSTALANDO GNOME"
 sudo apt install -y \
-  xserver-xorg-core \
-  xinit \
   gdm3 \
   gnome-core
 sudo systemctl set-default graphical.target
