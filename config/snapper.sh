@@ -38,6 +38,10 @@ sudo snapper -c home set-config \
     NUMBER_LIMIT="5" \
     NUMBER_LIMIT_IMPORTANT="5"
 
+# Inicia temporizadores
+sudo systemctl enable --now snapper-timeline.timer
+sudo systemctl enable --now snapper-cleanup.timer
+
 # Crear un snapshot manual de prueba
 sudo snapper -c root create --description "Snapshot inicial"
 sudo snapper -c root list
@@ -45,6 +49,7 @@ sudo snapper -c home create --description "Snapshot inicial"
 sudo snapper -c home list
 
 # GUI para btrfs: btrfs-assistant
+sudo apt install inotify-tools -y
 sudo apt install btrfs-assistant -y
 
 # Snapshots en GRUB: grub-btrfs
