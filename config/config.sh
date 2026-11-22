@@ -39,17 +39,33 @@ echo "APT::Install-Suggests   \"false\";" | sudo tee /etc/apt/apt.conf.d/99nosug
 print_section "ACTUALIZANDO EL SISTEMA"
 bash "$DIR_ACTUAL/updateme.sh"
 
-# Separar /home a un subvolumne btrfs diferente a /
-sudo mkdir -p /mnt/btrfs-home
+# Separar /home y /VMs en subvolúmenes Btrfs independientes de /
 BDEV=$(findmnt -n -o SOURCE / | sed 's/\[.*\]//')
-sudo mount -o subvolid=5 "$BDEV" /mnt/btrfs-home
-sudo btrfs subvolume create /mnt/btrfs-home/@home
-sudo cp --reflink=always -a /home/. /mnt/btrfs-home/@home
 BTRFS_UUID=$(findmnt -n -o UUID /)
-echo "UUID=$BTRFS_UUID  /home   btrfs  defaults,noatime,compress=zstd:3,subvol=@home   0  0" | sudo tee -a /etc/fstab
-sudo umount /mnt/btrfs-home
+BTRFS_MOUNT="/mnt/btrfs-root"
+sudo mkdir -p "$BTRFS_MOUNT" /home /VMs
+sudo mount -o subvolid=5 "$BDEV" "$BTRFS_MOUNT"
+# Crear subvolúmenes si no existen
+sudo btrfs subvolume create "$BTRFS_MOUNT/@home"
+sudo btrfs subvolume create "$BTRFS_MOUNT/@vms"
+# Copiar contenido existente de /home a @home (y /VMs a @vms si tuviera algo)
+sudo cp --reflink=always -a /home/. "$BTRFS_MOUNT/@home/"
+sudo cp --reflink=always -a /VMs/. "$BTRFS_MOUNT/@vms/"
+# Añadir /home (con zstd:3) y /VMs (con nodatacow) a /etc/fstab si aún no están registrados
+echo "UUID=$BTRFS_UUID  /home   btrfs  defaults,noatime,compress=zstd:3,subvol=@home   0  0" | sudo tee -a /etc/fstab >/dev/null
+echo "UUID=$BTRFS_UUID  /VMs    btrfs  defaults,noatime,nodatacow,subvol=@vms        0  0" | sudo tee -a /etc/fstab >/dev/null
+# Montar /home y /VMs
 sudo systemctl daemon-reload
-sudo mount -a
+sudo mount /home
+sudo mount /VMs
+# Limpiar residuos que hayan quedado en el árbol raíz (subvolid=5) bajo home/ o VMs/
+sudo rm -rf "$BTRFS_MOUNT/home"/* "$BTRFS_MOUNT/home"/.[!.]* "$BTRFS_MOUNT/home"/..?* 2>/dev/null || true
+sudo rmdir "$BTRFS_MOUNT/home" 2>/dev/null || true
+sudo rm -rf "$BTRFS_MOUNT/VMs"/* "$BTRFS_MOUNT/VMs"/.[!.]* "$BTRFS_MOUNT/VMs"/..?* 2>/dev/null || true
+sudo rmdir "$BTRFS_MOUNT/VMs" 2>/dev/null || true
+# Desmontar y limpiar punto de montaje temporal
+sudo umount "$BTRFS_MOUNT"
+sudo rmdir "$BTRFS_MOUNT" 2>/dev/null || true
 
 # Install GNOME con GDM3
 print_section "INSTALANDO GNOME"
