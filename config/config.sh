@@ -108,18 +108,16 @@ flush ruleset
 table inet filter {
     chain input {
         type filter hook input priority filter; policy drop;
-        # Permitir tráfico interno del sistema (loopback)
+        # Tráfico interno
         iifname "lo" accept
-        # Permitir respuestas a respuestas/conexiones iniciadas por ti
+        # Respuestas DHCP
+        udp sport 67 udp dport 68 accept
+        udp sport 547 udp dport 546 accept
+        # Conexiones establecidas o relacionadas
         ct state established,related accept
-        # (Opcional) Permitir ICMP (ping)
+        # ICMP IPv4 e IPv6
         ip protocol icmp accept
-    }
-    chain forward {
-        type filter hook forward priority filter; policy drop;
-    }
-    chain output {
-        type filter hook output priority filter; policy accept;
+        meta l4proto ipv6-icmp accept
     }
 }
 EOF
