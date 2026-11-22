@@ -59,10 +59,14 @@ sudo systemctl daemon-reload
 sudo mount /home
 sudo mount /VMs
 # Limpiar residuos que hayan quedado en el árbol raíz (subvolid=5) bajo home/ o VMs/
-sudo rm -rf "$BTRFS_MOUNT/home"/* "$BTRFS_MOUNT/home"/.[!.]* "$BTRFS_MOUNT/home"/..?* 2>/dev/null || true
-sudo rmdir "$BTRFS_MOUNT/home" 2>/dev/null || true
-sudo rm -rf "$BTRFS_MOUNT/VMs"/* "$BTRFS_MOUNT/VMs"/.[!.]* "$BTRFS_MOUNT/VMs"/..?* 2>/dev/null || true
-sudo rmdir "$BTRFS_MOUNT/VMs" 2>/dev/null || true
+sudo rm -rf "$BTRFS_MOUNT/@rootfs/home/"*
+sudo rm -rf "$BTRFS_MOUNT/@rootfs/home/".[!.]*
+sudo rm -rf "$BTRFS_MOUNT/@rootfs/home/"..?*
+sudo rm -rf "$BTRFS_MOUNT/@rootfs/VMs/"*
+sudo rm -rf "$BTRFS_MOUNT/@rootfs/VMs/".[!.]*
+sudo rm -rf "$BTRFS_MOUNT/@rootfs/VMs/"..?*
+sudo rmdir "$BTRFS_MOUNT/@rootfs/home"
+sudo rmdir "$BTRFS_MOUNT/@rootfs/VMs"
 # Desmontar y limpiar punto de montaje temporal
 sudo umount "$BTRFS_MOUNT"
 sudo rmdir "$BTRFS_MOUNT" 2>/dev/null || true
