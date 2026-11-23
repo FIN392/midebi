@@ -44,32 +44,36 @@ BDEV=$(findmnt -n -o SOURCE / | sed 's/\[.*\]//')
 BTRFS_UUID=$(findmnt -n -o UUID /)
 BTRFS_MOUNT="/mnt/btrfs-root"
 sudo mkdir -p "$BTRFS_MOUNT" /home /VMs
+# Montar el nivel superior de Btrfs (subvolid=5)
 sudo mount -o subvolid=5 "$BDEV" "$BTRFS_MOUNT"
-# Crear subvolúmenes si no existen
+# Crear subvolúmenes
 sudo btrfs subvolume create "$BTRFS_MOUNT/@home"
 sudo btrfs subvolume create "$BTRFS_MOUNT/@vms"
-# Copiar contenido existente de /home a @home (y /VMs a @vms si tuviera algo)
+# Copiar contenido existente
 sudo cp --reflink=always -a /home/. "$BTRFS_MOUNT/@home/"
 sudo cp --reflink=always -a /VMs/. "$BTRFS_MOUNT/@vms/"
-# Añadir /home (con zstd:3) y /VMs (con nodatacow) a /etc/fstab si aún no están registrados
-echo "UUID=$BTRFS_UUID  /home   btrfs  defaults,noatime,compress=zstd:3,subvol=@home   0  0" | sudo tee -a /etc/fstab >/dev/null
-echo "UUID=$BTRFS_UUID  /VMs    btrfs  defaults,noatime,nodatacow,subvol=@vms        0  0" | sudo tee -a /etc/fstab >/dev/null
-# Montar /home y /VMs
-sudo systemctl daemon-reload
-sudo mount /home
-sudo mount /VMs
-# Limpiar residuos que hayan quedado en el árbol raíz (subvolid=5) bajo home/ o VMs/
+# Limpiar directorios originales de @rootfs
 sudo rm -rf "$BTRFS_MOUNT/@rootfs/home/"*
 sudo rm -rf "$BTRFS_MOUNT/@rootfs/home/".[!.]*
 sudo rm -rf "$BTRFS_MOUNT/@rootfs/home/"..?*
 sudo rm -rf "$BTRFS_MOUNT/@rootfs/VMs/"*
 sudo rm -rf "$BTRFS_MOUNT/@rootfs/VMs/".[!.]*
 sudo rm -rf "$BTRFS_MOUNT/@rootfs/VMs/"..?*
+# Eliminar los directorios originales antes de montar los subvolúmenes
 sudo rmdir "$BTRFS_MOUNT/@rootfs/home"
 sudo rmdir "$BTRFS_MOUNT/@rootfs/VMs"
-# Desmontar y limpiar punto de montaje temporal
+# Registrar los nuevos montajes en /etc/fstab
+echo "UUID=$BTRFS_UUID  /home  btrfs  defaults,noatime,compress=zstd:3,subvol=@home  0  0" |
+    sudo tee -a /etc/fstab >/dev/null
+echo "UUID=$BTRFS_UUID  /VMs   btrfs  defaults,noatime,nodatacow,subvol=@vms  0  0" |
+    sudo tee -a /etc/fstab >/dev/null
+# Montar los nuevos subvolúmenes
+sudo systemctl daemon-reload
+sudo mount /home
+sudo mount /VMs
+# Desmontar y limpiar el punto de montaje temporal
 sudo umount "$BTRFS_MOUNT"
-sudo rmdir "$BTRFS_MOUNT" 2>/dev/null || true
+sudo rmdir "$BTRFS_MOUNT"
 
 # Install GNOME con GDM3
 print_section "INSTALANDO GNOME"
