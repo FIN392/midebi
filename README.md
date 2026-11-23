@@ -95,7 +95,7 @@ Seleccionar *Graphical install* y seleccionar las siguientes opciones en las dif
 <!-- -->
 - ¿Desea participar en la encuesta sobre el uso de los paquetes?: *No*
 <!-- -->
-- Elegir los programas a instalar: *(Desmarcar TODO excepto '**Utilidades estándar del sistema**')*
+- Elegir los programas a instalar: *Desmarcar TODO excepto '**Utilidades estándar del sistema**'*
 <!-- -->
 - Instalación completada
 
