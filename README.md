@@ -80,7 +80,7 @@ Seleccionar *Graphical install* y seleccionar las siguientes opciones en las dif
 #### Resultado de las particiones
 | Número |  Tamaño | Utilizar como | Punto de montaje |
 | :----: | ------: | :------------ | :--------------- |
-|   #1   |  512 MB | ESP           |                  |
+|   #1   |  512 MB | ESP           | /boot/efi        |
 |   #2   |  512 MB | ext4          | /boot            |
 |   #3   |   16 GB | intercambio   | intercambio      |
 |   #4   | 9999 GB | btrfs         | /                |
