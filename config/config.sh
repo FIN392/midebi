@@ -43,6 +43,7 @@ bash "$DIR_ACTUAL/updateme.sh"
 BDEV=$(findmnt -n -o SOURCE / | sed 's/\[.*\]//')
 BTRFS_UUID=$(findmnt -n -o UUID /)
 BTRFS_MOUNT="/mnt/btrfs-root"
+# crear puntos de montaje
 sudo mkdir -p "$BTRFS_MOUNT" /home /VMs
 # Montar el nivel superior de Btrfs (subvolid=5)
 sudo mount -o subvolid=5 "$BDEV" "$BTRFS_MOUNT"
@@ -62,6 +63,8 @@ sudo rm -rf "$BTRFS_MOUNT/@rootfs/VMs/"..?*
 # Eliminar los directorios originales antes de montar los subvolúmenes
 sudo rmdir "$BTRFS_MOUNT/@rootfs/home"
 sudo rmdir "$BTRFS_MOUNT/@rootfs/VMs"
+# Recrear puntos de montaje
+sudo mkdir -p /home /VMs
 # Registrar los nuevos montajes en /etc/fstab
 echo "UUID=$BTRFS_UUID  /home  btrfs  defaults,noatime,compress=zstd:3,subvol=@home  0  0" |
     sudo tee -a /etc/fstab >/dev/null
