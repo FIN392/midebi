@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
-trap 'rc=$?; echo "ERROR: \"$BASH_COMMAND\" falló en la línea $LINENO (código de salida: $rc)" >&2; exit "$rc"' ERR
 
 # Configurar escritorio
 
@@ -32,7 +31,7 @@ gsettings set org.gnome.desktop.app-folders folder-children "['']"
 gsettings reset org.gnome.shell app-picker-layout
 
 # Iconos en escritorio
-sudo apt install gnome-shell-extension-desktop-icons-ng -y
+sudo apt-get install gnome-shell-extension-desktop-icons-ng -y
 gsettings set org.gnome.shell.extensions.ding show-volumes true
 gsettings set org.gnome.shell.extensions.ding show-trash false
 gsettings set org.gnome.shell.extensions.ding show-home false
@@ -40,7 +39,7 @@ gsettings set org.gnome.shell.extensions.ding show-network-volumes true
 gnome-extensions enable ding@rastersoft.com
 
 # Dash to dock
-sudo apt install gnome-shell-extension-dashtodock -y
+sudo apt-get install gnome-shell-extension-dashtodock -y
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'LEFT'
 gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false
 gnome-extensions enable dash-to-dock@micxgx.gmail.com

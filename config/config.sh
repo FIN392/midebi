@@ -43,24 +43,24 @@ echo
 sudo nft list ruleset
 
 # Optimizar hardware
-run_section "5/$SECTIONS: OPTIMIZAR HARDWARE (15s)" "$DIR_ACTUAL/hardware.sh"
+run_section "5/$SECTIONS: OPTIMIZAR HARDWARE (20s)" "$DIR_ACTUAL/hardware.sh"
 sensors || true
 echo "Power profile: $(powerprofilesctl get)"
 
 # Instalar herramientas básicas
-run_section "6/$SECTIONS: INSTALAR HERRAMIENTAS (50s)" "$DIR_ACTUAL/tools.sh"
+run_section "6/$SECTIONS: INSTALAR HERRAMIENTAS (60s)" "$DIR_ACTUAL/tools.sh"
 dpkg-query -W -f='${Status}\t${Package}\t${Version}\n' dconf-editor curl jq gparted htop make
 
 # Instalar font JetBrains
-run_section "7/$SECTIONS: INSTALAR FUENTES (3s)" "$DIR_ACTUAL/fonts.sh"
+run_section "7/$SECTIONS: INSTALAR FUENTES (5s)" "$DIR_ACTUAL/fonts.sh"
 fc-list | grep -i "JetBrains Mono:"
 
 # Instalar GNOME con GDM3 y eliminar software innecesario
-run_section "8/$SECTIONS: INSTALAR GNOME (15m 30s)" "$DIR_ACTUAL/gnomeinstall.sh"
+run_section "8/$SECTIONS: INSTALAR GNOME (10m 30s)" "$DIR_ACTUAL/gnomeinstall.sh"
 dpkg-query -W -f='${Status}\t${Package}\t${Version}\n' gdm3 gnome* | grep -i "install ok"
 
 # Instalar Snapper, btrfs-assistant y grub-btrfs
-run_section "9/$SECTIONS: INSTALAR SNAPPER (ns)" "$DIR_ACTUAL/snapper.sh"
+run_section "9/$SECTIONS: INSTALAR SNAPPER (30s)" "$DIR_ACTUAL/snapper.sh"
 dpkg-query -W -f='${Status}\t${Package}\t${Version}\n' snapper btrfs-assistant
 sudo snapper list-configs
 
