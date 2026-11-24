@@ -25,6 +25,8 @@ SCRIPT_NAME=$(basename -- "${BASH_SOURCE[0]}")
 LOG_FILE="$DIR_ACTUAL/${SCRIPT_NAME%.*}.log"
 SECTIONS=99
 
+pwd $DIR_ACTUAL
+
 # Evitar la instalación de paquetes recomendados y sugeridos
 run_section "CONFIGURAR APT (1/$SECTIONS)" "$DIR_ACTUAL/aptconfig.sh"
 apt-config dump | grep -i '^APT::Install'
