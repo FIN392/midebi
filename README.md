@@ -107,6 +107,7 @@ Se reiniciará el sistema en este punto.
 
 Al inicia el sistema se mostrará la terminal, identificarse con el ID de usuario y contraseña, y ejecutar estos comandos:
 ```bash
+cd /var/tmp
 sudo apt install git --no-install-recommends --no-install-suggests -y
 git clone https://github.com/fin392/midebi
 bash midebi/config/config.sh

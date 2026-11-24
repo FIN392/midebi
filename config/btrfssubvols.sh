@@ -41,4 +41,3 @@ sudo mount /VMs
 # Desmontar y limpiar el punto de montaje temporal
 sudo umount "$BTRFS_MOUNT"
 sudo rmdir "$BTRFS_MOUNT"
-pwd ~
