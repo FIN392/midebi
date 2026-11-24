@@ -61,19 +61,19 @@ echo
 dpkg-query -W -f='${Status}\t${Package}\t${Version}\n' gdm3 gnome* | grep -i "install ok"
 
 # Configurar GNOME
-run_section "9/$SECTIONS: CONFIGURAR GNOME (ns)" "$DIR_ACTUAL/gnomeconfig.sh"
+run_section "9/$SECTIONS: CONFIGURAR GNOME (8s)" "$DIR_ACTUAL/gnomeconfig.sh"
 gsettings get org.gnome.shell enabled-extensions
 
 # Instalar Clipboard Indicator
-run_section "10/$SECTIONS: INSTALAR CLIPBOARD INDICATOR (ns)" "$DIR_ACTUAL/clipboard.sh"
+run_section "10/$SECTIONS: INSTALAR CLIPBOARD INDICATOR (1s)" "$DIR_ACTUAL/clipboard.sh"
 gsettings get org.gnome.shell enabled-extensions
 
 # Configurar usuario
-run_section "11/$SECTIONS: CONFIGURAR USUARIO (ns)" "$DIR_ACTUAL/userconfig.sh"
+run_section "11/$SECTIONS: CONFIGURAR USUARIO (1s)" "$DIR_ACTUAL/userconfig.sh"
 cat /etc/xdg/user-dirs.defaults
 
 # Instalar Tiling Shell
-run_section "12$SECTIONS: INSTALAR TILING SHELL (ns)" "$DIR_ACTUAL/tilingshell.sh"
+run_section "12$SECTIONS: INSTALAR TILING SHELL (1s)" "$DIR_ACTUAL/tilingshell.sh"
 gsettings get org.gnome.shell enabled-extensions
 
 # Instalar Snapper, btrfs-assistant y grub-btrfs
