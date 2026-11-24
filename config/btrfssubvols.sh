@@ -14,6 +14,7 @@ sudo mount -o subvolid=5 "$BDEV" "$BTRFS_MOUNT"
 # Crear subvolúmenes
 sudo btrfs subvolume create "$BTRFS_MOUNT/@home"
 sudo btrfs subvolume create "$BTRFS_MOUNT/@vms"
+sudo chattr +C "$BTRFS_MOUNT/@vms"
 # Copiar contenido existente
 sudo cp --reflink=always -a /home/. "$BTRFS_MOUNT/@home/"
 sudo cp --reflink=always -a /VMs/. "$BTRFS_MOUNT/@vms/"
@@ -32,7 +33,7 @@ sudo mkdir -p /home /VMs
 # Registrar los nuevos montajes en /etc/fstab
 echo "UUID=$BTRFS_UUID  /home  btrfs  defaults,noatime,compress=zstd:3,subvol=@home  0  0" |
     sudo tee -a /etc/fstab >/dev/null
-echo "UUID=$BTRFS_UUID  /VMs   btrfs  defaults,noatime,nodatacow,subvol=@vms  0  0" |
+echo "UUID=$BTRFS_UUID  /VMs   btrfs  defaults,noatime,compress=zstd:3,subvol=@vms   0  0" |
     sudo tee -a /etc/fstab >/dev/null
 # Montar los nuevos subvolúmenes
 sudo systemctl daemon-reload
