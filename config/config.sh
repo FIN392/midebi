@@ -57,7 +57,7 @@ fc-list | grep -i "JetBrains Mono:"
 
 # Instalar GNOME con GDM3 y eliminar software innecesario
 run_section "8/$SECTIONS: INSTALAR GNOME (ns)" "$DIR_ACTUAL/gnomeinstall.sh"
-dpkg-query -W -f='${Status}\t${Package}\t${Version}\n' gdm3 gnome-core
+dpkg-query -W -f='${Status}\t${Package}\t${Version}\n' gdm3 gnome* | grep -i "install ok"
 
 read -r -p "Pulsa Enter para continuar..."
 
