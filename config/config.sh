@@ -23,7 +23,7 @@ run_section() {
 DIR_ACTUAL="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCRIPT_NAME=$(basename -- "${BASH_SOURCE[0]}")
 LOG_FILE="$DIR_ACTUAL/${SCRIPT_NAME%.*}.log"
-SECTIONS=9
+SECTIONS=13
 
 # Evitar la instalación de paquetes recomendados y sugeridos
 run_section "1/$SECTIONS: CONFIGURAR APT (1s)" "$DIR_ACTUAL/aptconfig.sh"
@@ -59,8 +59,34 @@ fc-list | grep -i "JetBrains Mono:"
 run_section "8/$SECTIONS: INSTALAR GNOME (10m 30s)" "$DIR_ACTUAL/gnomeinstall.sh"
 dpkg-query -W -f='${Status}\t${Package}\t${Version}\n' gdm3 gnome* | grep -i "install ok"
 
+read -r -p "Pulsa Enter para continuar..."
+
+# Configurar GNOME
+run_section "9/$SECTIONS: CONFIGURAR GNOME (ns)" "$DIR_ACTUAL/gnomeconfig.sh"
+gsettings get org.gnome.shell enabled-extensions
+
+read -r -p "Pulsa Enter para continuar..."
+
+# Instalar Clipboard Indicator
+run_section "10/$SECTIONS: INSTALAR CLIPBOARD INDICATOR (ns)" "$DIR_ACTUAL/clipboard.sh"
+gsettings get org.gnome.shell enabled-extensions
+
+read -r -p "Pulsa Enter para continuar..."
+
+# Configurar usuario
+run_section "11/$SECTIONS: CONFIGURAR USUARIO (ns)" "$DIR_ACTUAL/userconfig.sh"
+cat /etc/xdg/user-dirs.defaults
+
+read -r -p "Pulsa Enter para continuar..."
+
+# Instalar Tiling Shell
+run_section "12$SECTIONS: INSTALAR TILING SHELL (ns)" "$DIR_ACTUAL/tilingshell.sh"
+gsettings get org.gnome.shell enabled-extensions
+
+read -r -p "Pulsa Enter para continuar..."
+
 # Instalar Snapper, btrfs-assistant y grub-btrfs
-run_section "9/$SECTIONS: INSTALAR SNAPPER (30s)" "$DIR_ACTUAL/snapper.sh"
+run_section "13/$SECTIONS: INSTALAR SNAPPER (30s)" "$DIR_ACTUAL/snapper.sh"
 dpkg-query -W -f='${Status}\t${Package}\t${Version}\n' snapper btrfs-assistant
 sudo snapper list-configs
 
@@ -75,41 +101,3 @@ case "$respuesta" in
         echo -e "\e[36m\u2139 Configuración finalizada.\e[0m"
         ;;
 esac
-
-
-
-# # Eliminar directorios innecesarios
-# print_section "ELIMINANDO DIRECTORIOS INNECESARIOS"
-# sudo cat << 'EOF' | sudo tee /etc/xdg/user-dirs.defaults > /dev/null
-# # Default settings for user directories
-# #
-# # The values are relative pathnames from the home directory and
-# # will be translated on a per-path-element basis into the users locale
-# DESKTOP=Desktop
-# DOWNLOAD=Downloads
-# #TEMPLATES=Templates
-# #PUBLICSHARE=Public
-# DOCUMENTS=Documents
-# #MUSIC=Music
-# #PICTURES=Pictures
-# #VIDEOS=Videos
-# # Another alternative is:
-# #MUSIC=Documents/Music
-# #PICTURES=Documents/Pictures
-# #VIDEOS=Documents/Videos
-# EOF
-
-
-
-# # Configurar gnome-terminal
-# print_section "CONFIGURANDO TERMINAL"
-# bash "$DIR_ACTUAL/terminalconfig.sh"
-
-# # Configurar escritorio
-# print_section "CONFIGURANDO ESCRITORIO"
-# bash "$DIR_ACTUAL/gnomeconfig.sh"
-
-# # Instalar y configurar Tiling Shell
-# print_section "INSTALANDO TILING SHELL"
-# bash "$DIR_ACTUAL/tilingshell.sh"
-
