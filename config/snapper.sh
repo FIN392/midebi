@@ -47,7 +47,7 @@ sudo snapper -c home create --description "Snapshot inicial"
 
 # GUI para btrfs: btrfs-assistant
 sudo apt-get install inotify-tools -y
-sudo apt install btrfs-assistant -y
+sudo apt-get install btrfs-assistant -y
 
 # Snapshots en GRUB: grub-btrfs
 cd /tmp

@@ -13,7 +13,7 @@ print_section() {
 run_section() {
   print_section "$1"
   {
-    bash "$2" 2> >( tee -a "$LOG_FILE" >&2 )
+    bash -x "$2" 2> >( tee -a "$LOG_FILE" >&2 )
   } >> "$LOG_FILE"
 }
 
