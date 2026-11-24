@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
-trap 'rc=$?; echo "ERROR: \"$BASH_COMMAND\" falló en la línea $LINENO (código de salida: $rc)" >&2; exit "$rc"' ERR
 
-# Ajuster del hardware
+# Optimizar hardware
 
 # Gestión de Memoria y Swap (ZRAM)
 sudo apt install zram-tools -y

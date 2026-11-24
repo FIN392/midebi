@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
-trap 'rc=$?; echo "ERROR: \"$BASH_COMMAND\" falló en la línea $LINENO (código de salida: $rc)" >&2; exit "$rc"' ERR
 
-# Instalación de Snapper
+# Instalar Snapper, btrfs-assistant y grub-btrfs
 
 # Instalar
 sudo apt install snapper -y
@@ -44,9 +43,7 @@ sudo systemctl enable --now snapper-cleanup.timer
 
 # Crear un snapshot manual de prueba
 sudo snapper -c root create --description "Snapshot inicial"
-sudo snapper -c root list
 sudo snapper -c home create --description "Snapshot inicial"
-sudo snapper -c home list
 
 # GUI para btrfs: btrfs-assistant
 sudo apt install inotify-tools -y
