@@ -2,7 +2,7 @@
 set -Eeuo pipefail
 
 # Instalar herramientas básicas
-sudo apt install -y \
+sudo apt-get install -y \
   dconf-editor \
   curl \
   jq \

@@ -42,20 +42,14 @@ run_section "CONFIGURAR FIREWALL (4/$SECTIONS)" "$DIR_ACTUAL/firewall.sh"
 echo
 sudo nft list ruleset
 
-read -r -p "Pulsa Enter para continuar..."
-
 # Optimizar hardware
 run_section "OPTIMIZAR HARDWARE (5/$SECTIONS)" "$DIR_ACTUAL/hardware.sh"
-sensors
+sensors || true
 echo "Power profile: $(powerprofilesctl get)"
-
-read -r -p "Pulsa Enter para continuar..."
 
 # Instalar herramientas básicas
 run_section "INSTALAR HERRAMIENTAS (6/$SECTIONS)" "$DIR_ACTUAL/tools.sh"
 dpkg-query -W -f='${Status}\t${Package}\t${Version}\n' dconf-editor curl jq gparted htop make
-
-read -r -p "Pulsa Enter para continuar..."
 
 # Instalar font JetBrains
 run_section "INSTALAR FUENTES (7/$SECTIONS)" "$DIR_ACTUAL/fonts.sh"

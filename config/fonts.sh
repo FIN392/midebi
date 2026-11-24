@@ -2,6 +2,5 @@
 set -Eeuo pipefail
 
 # Instalar font JetBrains
-print_section "INSTALANDO FUENTES JETBRAINS MONO"
-sudo apt install fonts-jetbrains-mono -y
+sudo apt-get install fonts-jetbrains-mono -y
 fc-cache -f
