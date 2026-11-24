@@ -4,7 +4,7 @@ set -Eeuo pipefail
 # Instalar Snapper, btrfs-assistant y grub-btrfs
 
 # Instalar
-sudo apt install snapper -y
+sudo apt-get install snapper -y
 
 # Configurar
 # Crear la configuración de Snapper para root y home
@@ -46,7 +46,7 @@ sudo snapper -c root create --description "Snapshot inicial"
 sudo snapper -c home create --description "Snapshot inicial"
 
 # GUI para btrfs: btrfs-assistant
-sudo apt install inotify-tools -y
+sudo apt-get install inotify-tools -y
 sudo apt install btrfs-assistant -y
 
 # Snapshots en GRUB: grub-btrfs

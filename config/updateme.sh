@@ -3,9 +3,9 @@ set -Eeuo pipefail
 
 # Actualizar
 
-sudo apt update
-sudo apt full-upgrade -y
-sudo apt autoremove --purge -y
-sudo apt autoclean
-sudo apt clean
+sudo apt-get update
+sudo apt-get full-upgrade -y
+sudo apt-get autoremove --purge -y
+sudo apt-get autoclean
+sudo apt-get clean
 sudo update-ca-certificates
