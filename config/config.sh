@@ -30,25 +30,25 @@ run_section "1/$SECTIONS: CONFIGURAR APT (1s)" "$DIR_ACTUAL/aptconfig.sh"
 apt-config dump | grep -i '^APT::Install'
 
 # Actualizar
-run_section "2/$SECTIONS: ACTUALIZAR EL SISTEMA (ns)" "$DIR_ACTUAL/updateme.sh"
+run_section "2/$SECTIONS: ACTUALIZAR EL SISTEMA (3s)" "$DIR_ACTUAL/updateme.sh"
 sudo apt -s full-upgrade
 
 # Crear subvolúmenes Btrfs: @rootfs, @home y @vms
-run_section "3/$SECTIONS: CREAR SUBVOLUMENES BTRFS (ns)" "$DIR_ACTUAL/btrfssubvols.sh"
+run_section "3/$SECTIONS: CREAR SUBVOLUMENES BTRFS (1s)" "$DIR_ACTUAL/btrfssubvols.sh"
 sudo btrfs subvolume list / | grep -i 'level 5'
 
 # Configurar firewall
-run_section "4/$SECTIONS: CONFIGURAR FIREWALL (ns)" "$DIR_ACTUAL/firewall.sh"
+run_section "4/$SECTIONS: CONFIGURAR FIREWALL (1s)" "$DIR_ACTUAL/firewall.sh"
 echo
 sudo nft list ruleset
 
 # Optimizar hardware
-run_section "5/$SECTIONS: OPTIMIZAR HARDWARE (ns)" "$DIR_ACTUAL/hardware.sh"
+run_section "5/$SECTIONS: OPTIMIZAR HARDWARE (50s)" "$DIR_ACTUAL/hardware.sh"
 sensors || true
 echo "Power profile: $(powerprofilesctl get)"
 
 # Instalar herramientas básicas
-run_section "6/$SECTIONS: INSTALAR HERRAMIENTAS (ns)" "$DIR_ACTUAL/tools.sh"
+run_section "6/$SECTIONS: INSTALAR HERRAMIENTAS (50s)" "$DIR_ACTUAL/tools.sh"
 dpkg-query -W -f='${Status}\t${Package}\t${Version}\n' dconf-editor curl jq gparted htop make
 
 # Instalar font JetBrains
