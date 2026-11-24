@@ -13,7 +13,7 @@ print_section() {
 run_section() {
   print_section "$1"
   {
-    bash -x "$2" 2> >( tee -a "$LOG_FILE" >&2 )
+    bash "$2" 2> >( tee -a "$LOG_FILE" >&2 )
   } >> "$LOG_FILE"
 }
 
@@ -23,43 +23,58 @@ run_section() {
 DIR_ACTUAL="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCRIPT_NAME=$(basename -- "${BASH_SOURCE[0]}")
 LOG_FILE="$DIR_ACTUAL/${SCRIPT_NAME%.*}.log"
-SECTIONS=99
-
-pwd $DIR_ACTUAL
+SECTIONS=9
 
 # Evitar la instalación de paquetes recomendados y sugeridos
 run_section "CONFIGURAR APT (1/$SECTIONS)" "$DIR_ACTUAL/aptconfig.sh"
 apt-config dump | grep -i '^APT::Install'
 
+pwd
+read -r -p "Pulsa Enter para continuar..."
+
 # Actualizar
 run_section "ACTUALIZAR EL SISTEMA (2/$SECTIONS)" "$DIR_ACTUAL/updateme.sh"
 sudo apt -s full-upgrade
 
+read -r -p "Pulsa Enter para continuar..."
+
 # Crear subvolúmenes Btrfs: @rootfs, @home y @vms
 run_section "CREAR SUBVOLUMENES BTRFS (3/$SECTIONS)" "$DIR_ACTUAL/btrfssubvols.sh"
 sudo btrfs subvolume list / | grep -i 'level 5'
+
+read -r -p "Pulsa Enter para continuar..."
 
 # Instalar Snapper, btrfs-assistant y grub-btrfs
 run_section "INSTALAR SNAPPER (4/$SECTIONS)" "$DIR_ACTUAL/snapper.sh"
 dpkg-query -W -f='${Status}\t${Package}\t${Version}\n' snapper btrfs-assistant
 sudo snapper list-configs
 
+read -r -p "Pulsa Enter para continuar..."
+
 # Configurar firewall
 run_section "CONFIGURAR FIREWALL (5/$SECTIONS)" "$DIR_ACTUAL/firewall.sh"
 sudo nft list ruleset
+
+read -r -p "Pulsa Enter para continuar..."
 
 # Optimizar hardware
 run_section "OPTIMIZAR HARDWARE (6/$SECTIONS)" "$DIR_ACTUAL/hardware.sh"
 sensors
 echo "Power profile: $(powerprofilesctl get)"
 
+read -r -p "Pulsa Enter para continuar..."
+
 # Instalar herramientas básicas
 run_section "INSTALAR HERRAMIENTAS (7/$SECTIONS)" "$DIR_ACTUAL/tools.sh"
 dpkg-query -W -f='${Status}\t${Package}\t${Version}\n' dconf-editor curl jq gparted htop make
 
+read -r -p "Pulsa Enter para continuar..."
+
 # Instalar font JetBrains
 run_section "INSTALAR FUENTES (8/$SECTIONS)" "$DIR_ACTUAL/fonts.sh"
 fc-list | grep -i "JetBrains Mono:"
+
+read -r -p "Pulsa Enter para continuar..."
 
 # Instalar GNOME con GDM3 y eliminar software innecesario
 run_section "INSTALAR GNOME (9/$SECTIONS)" "$DIR_ACTUAL/gnomeinstall.sh"

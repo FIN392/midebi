@@ -3,6 +3,9 @@ set -Eeuo pipefail
 
 # Instalar Snapper, btrfs-assistant y grub-btrfs
 
+pwd
+read -r -p "Pulsa Enter para continuar..."
+
 # Instalar
 sudo apt-get install snapper -y
 
