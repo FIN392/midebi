@@ -2,13 +2,13 @@
 set -Eeuo pipefail
 
 # Instalar GNOME con GDM3
-sudo apt install -y \
+sudo apt-get install -y \
   gdm3 \
   gnome-core
 sudo systemctl set-default graphical.target
 
 # Eliminar aplicaciones de GNOME que no se necesitan
-sudo apt purge -y \
+sudo apt-get purge -y \
   gnome-software \
   gnome-tour \
   gnome-calendar \
@@ -24,6 +24,6 @@ sudo apt purge -y \
   simple-scan \
   evince \
   loupe
-sudo apt autoremove --purge -y
-sudo apt autoclean
-sudo apt clean
+sudo apt-get autoremove --purge -y
+sudo apt-get autoclean
+sudo apt-get clean

@@ -26,45 +26,43 @@ LOG_FILE="$DIR_ACTUAL/${SCRIPT_NAME%.*}.log"
 SECTIONS=9
 
 # Evitar la instalación de paquetes recomendados y sugeridos
-run_section "CONFIGURAR APT (1/$SECTIONS)" "$DIR_ACTUAL/aptconfig.sh"
+run_section "1/$SECTIONS: CONFIGURAR APT (1s)" "$DIR_ACTUAL/aptconfig.sh"
 apt-config dump | grep -i '^APT::Install'
 
 # Actualizar
-run_section "ACTUALIZAR EL SISTEMA (2/$SECTIONS)" "$DIR_ACTUAL/updateme.sh"
+run_section "2/$SECTIONS: ACTUALIZAR EL SISTEMA (ns)" "$DIR_ACTUAL/updateme.sh"
 sudo apt -s full-upgrade
 
 # Crear subvolúmenes Btrfs: @rootfs, @home y @vms
-run_section "CREAR SUBVOLUMENES BTRFS (3/$SECTIONS)" "$DIR_ACTUAL/btrfssubvols.sh"
+run_section "3/$SECTIONS: CREAR SUBVOLUMENES BTRFS (ns)" "$DIR_ACTUAL/btrfssubvols.sh"
 sudo btrfs subvolume list / | grep -i 'level 5'
 
 # Configurar firewall
-run_section "CONFIGURAR FIREWALL (4/$SECTIONS)" "$DIR_ACTUAL/firewall.sh"
+run_section "4/$SECTIONS: CONFIGURAR FIREWALL (ns)" "$DIR_ACTUAL/firewall.sh"
 echo
 sudo nft list ruleset
 
 # Optimizar hardware
-run_section "OPTIMIZAR HARDWARE (5/$SECTIONS)" "$DIR_ACTUAL/hardware.sh"
+run_section "5/$SECTIONS: OPTIMIZAR HARDWARE (ns)" "$DIR_ACTUAL/hardware.sh"
 sensors || true
 echo "Power profile: $(powerprofilesctl get)"
 
 # Instalar herramientas básicas
-run_section "INSTALAR HERRAMIENTAS (6/$SECTIONS)" "$DIR_ACTUAL/tools.sh"
+run_section "6/$SECTIONS: INSTALAR HERRAMIENTAS (ns)" "$DIR_ACTUAL/tools.sh"
 dpkg-query -W -f='${Status}\t${Package}\t${Version}\n' dconf-editor curl jq gparted htop make
 
 # Instalar font JetBrains
-run_section "INSTALAR FUENTES (7/$SECTIONS)" "$DIR_ACTUAL/fonts.sh"
+run_section "7/$SECTIONS: INSTALAR FUENTES (ns)" "$DIR_ACTUAL/fonts.sh"
 fc-list | grep -i "JetBrains Mono:"
 
-read -r -p "Pulsa Enter para continuar..."
-
 # Instalar GNOME con GDM3 y eliminar software innecesario
-run_section "INSTALAR GNOME (8/$SECTIONS)" "$DIR_ACTUAL/gnomeinstall.sh"
+run_section "8/$SECTIONS: INSTALAR GNOME (ns)" "$DIR_ACTUAL/gnomeinstall.sh"
 dpkg-query -W -f='${Status}\t${Package}\t${Version}\n' gdm3 gnome-core
 
 read -r -p "Pulsa Enter para continuar..."
 
 # Instalar Snapper, btrfs-assistant y grub-btrfs
-run_section "INSTALAR SNAPPER (9/$SECTIONS)" "$DIR_ACTUAL/snapper.sh"
+run_section "9/$SECTIONS: INSTALAR SNAPPER" "$DIR_ACTUAL/snapper.sh"
 dpkg-query -W -f='${Status}\t${Package}\t${Version}\n' snapper btrfs-assistant
 sudo snapper list-configs
 
