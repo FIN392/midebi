@@ -38,8 +38,8 @@ gsettings set org.gnome.shell.extensions.ding show-home false
 gsettings set org.gnome.shell.extensions.ding show-network-volumes true
 gnome-extensions enable ding@rastersoft.com
 
-# Dash to dock  
-sudo apt-get install shell-extension-dashtodock -y
+# Dash to dock
+sudo apt-get install gnome-shell-extension-dashtodock -y
 gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'LEFT'
 gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false
 gnome-extensions enable dash-to-dock@micxgx.gmail.com
