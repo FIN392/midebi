@@ -27,15 +27,22 @@ sudo apt-get install -y \
 # Rendimiento CPU
 powerprofilesctl set balanced || true
 
-read -r -p "Pulsa Enter para continuar..."
+read -r -p "1 Pulsa Enter para continuar..."
 
 # Sensores
 sudo sensors-detect --auto
-read -r -p "Pulsa Enter para continuar..."
+
+read -r -p "2 Pulsa Enter para continuar..."
+
 sensors || true
-read -r -p "Pulsa Enter para continuar..."
+
+read -r -p "3 Pulsa Enter para continuar..."
+
 echo "nct6775" | sudo tee /etc/modules-load.d/nct6775.conf
-read -r -p "Pulsa Enter para continuar..."
+
+read -r -p "4 Pulsa Enter para continuar..."
+
 sudo modprobe nct6775 || true 
-read -r -p "Pulsa Enter para continuar..."
+
+read -r -p "5 Pulsa Enter para continuar..."
 

@@ -39,6 +39,7 @@ sudo btrfs subvolume list / | grep -i 'level 5'
 
 # Configurar firewall
 run_section "CONFIGURAR FIREWALL (4/$SECTIONS)" "$DIR_ACTUAL/firewall.sh"
+echo
 sudo nft list ruleset
 
 read -r -p "Pulsa Enter para continuar..."
