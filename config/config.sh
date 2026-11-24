@@ -29,7 +29,6 @@ SECTIONS=9
 run_section "CONFIGURAR APT (1/$SECTIONS)" "$DIR_ACTUAL/aptconfig.sh"
 apt-config dump | grep -i '^APT::Install'
 
-pwd $DIR_ACTUAL
 read -r -p "Pulsa Enter para continuar..."
 
 # Actualizar
