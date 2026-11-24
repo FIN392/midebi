@@ -72,13 +72,9 @@ gsettings get org.gnome.shell enabled-extensions
 run_section "11/$SECTIONS: CONFIGURAR USUARIO (ns)" "$DIR_ACTUAL/userconfig.sh"
 cat /etc/xdg/user-dirs.defaults
 
-read -r -p "Pulsa Enter para continuar..."
-
 # Instalar Tiling Shell
 run_section "12$SECTIONS: INSTALAR TILING SHELL (ns)" "$DIR_ACTUAL/tilingshell.sh"
 gsettings get org.gnome.shell enabled-extensions
-
-read -r -p "Pulsa Enter para continuar..."
 
 # Instalar Snapper, btrfs-assistant y grub-btrfs
 run_section "13/$SECTIONS: INSTALAR SNAPPER (30s)" "$DIR_ACTUAL/snapper.sh"
