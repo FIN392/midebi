@@ -29,19 +29,13 @@ SECTIONS=9
 run_section "CONFIGURAR APT (1/$SECTIONS)" "$DIR_ACTUAL/aptconfig.sh"
 apt-config dump | grep -i '^APT::Install'
 
-read -r -p "Pulsa Enter para continuar..."
-
 # Actualizar
 run_section "ACTUALIZAR EL SISTEMA (2/$SECTIONS)" "$DIR_ACTUAL/updateme.sh"
 sudo apt -s full-upgrade
 
-read -r -p "Pulsa Enter para continuar..."
-
 # Crear subvolúmenes Btrfs: @rootfs, @home y @vms
 run_section "CREAR SUBVOLUMENES BTRFS (3/$SECTIONS)" "$DIR_ACTUAL/btrfssubvols.sh"
 sudo btrfs subvolume list / | grep -i 'level 5'
-
-read -r -p "Pulsa Enter para continuar..."
 
 # Configurar firewall
 run_section "CONFIGURAR FIREWALL (4/$SECTIONS)" "$DIR_ACTUAL/firewall.sh"

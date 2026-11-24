@@ -4,7 +4,7 @@ set -Eeuo pipefail
 # Optimizar hardware
 
 # Gestión de Memoria y Swap (ZRAM)
-sudo apt install zram-tools -y
+sudo apt-get install zram-tools -y
 sudo cat << 'EOF' | sudo tee /etc/default/zramswap > /dev/null
 ALGO=zstd
 PERCENT=50
@@ -17,28 +17,25 @@ vm.vfs_cache_pressure = 50
 EOF
 sudo sysctl --system
 
-# Optimización de Btrfs y Puntos de Montaje (/etc/fstab)
-sudo apt install nvme-cli -y
-awk '
-  !/^#/ && $2 == "/" && $3 == "btrfs" {
-    $4 = "defaults,noatime,compress=zstd:3,subvol=@rootfs"
-  }
-  { print }
-' /etc/fstab > /tmp/fstab.tmp && sudo mv /tmp/fstab.tmp /etc/fstab
-sudo systemctl daemon-reload
-sudo mount -o remount /
+# Instalación nvme-cli, microcodigo de AMD, sensores y power-profiles-daemon
+sudo apt-get install -y \
+  nvme-cli \
+  amd64-microcode \
+  lm-sensors \
+  power-profiles-daemon
 
-# Rendimiento CPU 
-sudo apt install power-profiles-daemon -y
+# Rendimiento CPU
 powerprofilesctl set balanced || true
 
-# Microcodigo de AMD
-sudo apt install amd64-microcode -y
+read -r -p "Pulsa Enter para continuar..."
 
 # Sensores
-sudo apt install lm-sensors -y
 sudo sensors-detect --auto
+read -r -p "Pulsa Enter para continuar..."
 sensors || true
+read -r -p "Pulsa Enter para continuar..."
 echo "nct6775" | sudo tee /etc/modules-load.d/nct6775.conf
+read -r -p "Pulsa Enter para continuar..."
 sudo modprobe nct6775 || true 
+read -r -p "Pulsa Enter para continuar..."
 
