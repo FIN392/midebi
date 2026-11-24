@@ -60,19 +60,13 @@ run_section "8/$SECTIONS: INSTALAR GNOME (10m 30s)" "$DIR_ACTUAL/gnomeinstall.sh
 echo
 dpkg-query -W -f='${Status}\t${Package}\t${Version}\n' gdm3 gnome* | grep -i "install ok"
 
-read -r -p "Pulsa Enter para continuar..."
-
 # Configurar GNOME
 run_section "9/$SECTIONS: CONFIGURAR GNOME (ns)" "$DIR_ACTUAL/gnomeconfig.sh"
 gsettings get org.gnome.shell enabled-extensions
 
-read -r -p "Pulsa Enter para continuar..."
-
 # Instalar Clipboard Indicator
 run_section "10/$SECTIONS: INSTALAR CLIPBOARD INDICATOR (ns)" "$DIR_ACTUAL/clipboard.sh"
 gsettings get org.gnome.shell enabled-extensions
-
-read -r -p "Pulsa Enter para continuar..."
 
 # Configurar usuario
 run_section "11/$SECTIONS: CONFIGURAR USUARIO (ns)" "$DIR_ACTUAL/userconfig.sh"

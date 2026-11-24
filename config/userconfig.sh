@@ -12,7 +12,6 @@ alias ls='ls -l --color=auto --all --time-style=long-iso'
 echo "$BLOQUE" >> ~/.bashrc
 
 # Eliminar directorios innecesarios
-print_section "ELIMINANDO DIRECTORIOS INNECESARIOS"
 sudo cat << 'EOF' | sudo tee /etc/xdg/user-dirs.defaults > /dev/null
 # Default settings for user directories
 #
