@@ -19,7 +19,7 @@ sudo cat << 'EOF' | sudo tee /etc/xdg/user-dirs.defaults > /dev/null
 # will be translated on a per-path-element basis into the users locale
 DESKTOP=Desktop
 DOWNLOAD=Downloads
-#TEMPLATES=Templates
+TEMPLATES=Templates
 #PUBLICSHARE=Public
 DOCUMENTS=Documents
 #MUSIC=Music
